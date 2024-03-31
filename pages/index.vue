@@ -62,7 +62,7 @@ import CollectInputSelect from '~/components/inputs/CollectInputSelect.vue'
 import CollectLangSwitcher from "~/components/i18n/CollectLangSwitcher.vue";
 
 useHead({
-  title: 'Bienvenue',
+  title: 'CollectPoke',
 })
 </script>
 

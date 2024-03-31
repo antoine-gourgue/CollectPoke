@@ -42,19 +42,37 @@
             v-for="(item, index) in filteredItems"
             :key="index"
             :class="{ 'bg-secondary-300': index === selectedIndex }"
-            class="text-gray-900 cursor-pointer hover:bg-secondary-300 focus:bg-secondary-300 hover:text-gray-900 focus:text-gray-900 py-2 px-4 flex justify-between"
+            class="text-gray-900 cursor-pointer hover:bg-secondary-300 focus:bg-secondary-300 hover:text-gray-900 focus:text-gray-900 py-2 px-4 flex items-center"
             @click="selectItem(item)"
             @mouseenter="selectedIndex = index"
         >
-          <div
-              v-for="(key, index2) in labelKeys"
-              :key="key"
-              class="w-full overflow-hidden text-left"
-              :class="index2 === 0 ? 'font-bold' : ''"
-          >
-            {{ capitalize(String(item[key]).toLowerCase()) }}
+          <div class="flex items-center mr-2">
+            <i
+                class="fa fa-camera fa-lg cursor-pointer"
+                @mouseenter="hoveredIndex = index"
+                @mouseleave="hoveredIndex = null"
+            ></i>
+            <img
+                v-if="hoveredIndex === index"
+                :src="item.images.small"
+                alt="Pokémon Image"
+                class="absolute w-48 h-auto -left-56 top-0 rounded-lg shadow-lg transition-all duration-300 ease-in-out"
+            >
+          </div>
+          <div class="flex-grow">
+            <div
+                v-for="(key, index2) in labelKeys"
+                :key="key"
+                class="w-full overflow-hidden text-left"
+                :class="index2 === 0 ? 'font-bold' : ''"
+            >
+              {{ capitalize(String(item[key]).toLowerCase()) }}
+            </div>
           </div>
         </li>
+
+
+
         <li
             v-if="filteredItems.length === 0"
             class="leading-6 text-gray-900 py-2 px-4 font-semibold"
@@ -136,6 +154,7 @@ const filteredItems: Ref<Record<string, unknown>[]> = ref(props.items)
 const selectedIndex: Ref<number | null> = ref(null)
 const selectWrapper = ref<HTMLElement | null>(null)
 const list = ref<HTMLElement | null>(null)
+const hoveredIndex = ref(null);
 
 /* LIFECYCLE */
 onMounted(() => {
@@ -250,4 +269,6 @@ const addNewItem = () => {
   showDropdown.value = false
   selectedIndex.value = null
 }
+
+const showImage = ref(null);
 </script>

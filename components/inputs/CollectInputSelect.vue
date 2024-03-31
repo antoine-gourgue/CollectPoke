@@ -17,10 +17,6 @@ import CollectSelect from '@/components/inputs/CollectSelect.vue'
 import {fetchPokemons} from "~/lib/services/pokemonServices";
 
 // Typage pour une ville
-interface City {
-  id: number
-  name: string
-}
 
 /* PROPS */
 const props = defineProps({
@@ -57,6 +53,7 @@ const handleItemSelected = (pokemon: Pokemon) => {
 
 onMounted(async () => {
   pokemons.value = await fetchPokemons();
+  console.log(pokemons.value)
 });
 
 

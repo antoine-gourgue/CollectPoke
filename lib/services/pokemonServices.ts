@@ -10,7 +10,12 @@ export const fetchPokemons = async (): Promise<Pokemon[]> => {
         return response.data.data.map((pokemon: Pokemon) => ({
             id: pokemon.id,
             name: pokemon.name,
+            images: {
+                small: pokemon.images.small,
+                large: pokemon.images.large
+            }
         }));
+
     } catch (error) {
         console.error('Error fetching Pokémon data:', error);
         return [];
